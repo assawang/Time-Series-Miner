@@ -15,8 +15,6 @@ Output: Numpy Array
 # Author: Zhongyu Wang
 # License: BSD 3-Clause or CC-0
 
-# import UTData as utd
-
 import numpy as np
 import math
 

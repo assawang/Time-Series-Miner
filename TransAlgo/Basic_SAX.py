@@ -1,15 +1,46 @@
 """
 Basic SAX
 ===============================================
-Implement of basic Piecewise Aggregation Approximation algorithm
+Implement of basic Symbolic Aggregation approXimation algorithm
 
-Reference:Keogh E, Chakrabarti K, Pazzani M, et al. Dimensionality
-Reduction for Fast Similarity Search in Large Time Series Databases[J].
-Knowledge & Information Systems, 2001, 3(3):263-286.
+Reference:
 
-Input: Numpy Array , Reduced Data Piece Num W
+Input: Numpy Array, Reduced Data Piece Num W, Num of Symbol A 
 Output: Numpy Array
 
 """
 
-print("to be continue")
+# Author: Zhongyu Wang
+# License: BSD 3-Clause or CC-0
+
+import numpy as np
+import math
+from TransAlgo import Basic_PAA as bpaa
+
+
+def Divide(a):
+    return {
+        3: [-0.43, 0.43],
+        4: [-0.67, 0, 0.67],
+        5: [-0.84, -0.25, 0.25, 0.84]
+    }.get(a)
+
+
+def getSymbol(divide, num):
+    sym = 'a'
+    for i in divide:
+        if num <= i:
+            break
+        sym = chr(ord(sym) + 1)
+    return sym
+
+
+def Basic_SAX(data, w, a):
+    PAAdata = bpaa.Basic_PAA(data, w)
+    divide = Divide(a)
+    res = []
+    for i in PAAdata:
+        res.append(getSymbol(divide, i))
+    return res
+
+
